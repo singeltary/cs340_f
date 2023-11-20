@@ -1,0 +1,67 @@
+<head>
+    <title>Donor Page</title>
+</head>
+
+<body>
+    <ul>
+        <li><a href="donors">Display Donors</a></li>
+        <li><a href="donation">Donations</a></li>
+        <li><a href="bloodstock">Bloodstock</a></li>
+        <li><a href="recipients">Recipients</a></li>
+        <li><a href="transfers">Transfers</a></li>
+    </ul>
+	
+	
+    <h1>Donors</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Donor ID</th>
+                <th>Name</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Type</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+			{% for person in people %}
+            <tr>
+                <td>{{person['donorID']}}</td>
+                <td>{{person['name']}}</td>
+                <td>{{person['street']}}</td>
+                <td>{{person['city']}}</td>
+                <td>{{person['state_ab']}}</td>
+                <td>{{person['zip']}}</td>
+                <td>{{person['bloodType']}}</td>
+                <td><a href="update_donor?person={{person['donorID']}}">Update</a></td>
+                <td><button>Delete</button></td>
+            </tr>
+			{% endfor %}
+        </tbody>
+    </table>
+	<form action="/donors" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="street">Street:</label>
+        <input type="text" id="street" name="street" required><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br>
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" required><br>
+
+        <label for="zip">Zip:</label>
+        <input type="text" id="zip" name="zip" required><br>
+
+        <label for="type">Blood Type:</label>
+        <input type="text" id="type" name="type" required><br>
+
+        <button type="submit" name="add_donor">Add Donor</button>
+    </form>
+</body>
