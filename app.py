@@ -31,7 +31,7 @@ def add_donor():
             zip = request.form["zip"]
             bloodType = request.form["type"]
                 
-            query = "INSERT INTO Donors (name, street, city, state_ab, zip, bloodType) VALUES (%s, %s, %s, %s, %s, %s)"
+            query = "INSERT INTO Donors (name, street, city, state_ab, zip, bloodType) VALUES (%s, %s, %s, %s, %s, %s);"
             cur = mysql.connection.cursor()
             cur.execute(query, (name, street, city, state_ab, zip, bloodType))
             mysql.connection.commit()
