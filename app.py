@@ -15,27 +15,23 @@ def root():
 
 @app.route('/donors', methods=['POST', 'GET'])
 def display_donors():
-    query = "SELECT * FROM Donors;"
-    cursor = db.execute_query(db_connection=db_connection, query=query)
-    results = cursor.fetchall()
-    return render_template("donors.j2", people=results)
-
-#@app.route('/add_donor', methods=['POST','GET']
-def add_donor():
+    if request.method == "GET":
+        query = "SELECT * FROM Donors;"
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        return render_template("donors.j2", people=results)
+        
     if request.method == "POST":
-        if request.form.get("add_donor"):
-            name = request.form["name"]
-            street = request.form["street"]
-            city = request.form["city"]
-            state_ab = request.form["state"]
-            zip = request.form["zip"]
-            bloodType = request.form["type"]
+        name = request.form.get("name")
+        street = request.form.get("street")
+        city = request.form.get("city")
+        state_ab = request.form.get("state")
+        zip = request.form.get("zip")
+        bloodType = request.form.get("type")
                 
-            query = "INSERT INTO Donors (name, street, city, state_ab, zip, bloodType) VALUES (%s, %s, %s, %s, %s, %s);"
-            cur = mysql.connection.cursor()
-            cur.execute(query, (name, street, city, state_ab, zip, bloodType))
-            mysql.connection.commit()
-            return redirect("/donors")
+        query = "INSERT INTO Donors (name, street, city, state_ab, zip, bloodType) VALUES (%s, %s, %s, %s, %s, %s);"
+        cur = db.execute_query(db_connection=db_connection, query=query, query_params=(name, street, city, state_ab, zip, bloodType))
+        return redirect("/donors")
 
 # Listener
 
