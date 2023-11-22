@@ -37,7 +37,7 @@
                 <td>{{person['state_ab']}}</td>
                 <td>{{person['zip']}}</td>
                 <td>{{person['bloodType']}}</td>
-                <td><a href="update_donor?person={{person['donorID']}}">Update</a></td>
+                <td><a href="update_donor/{{person['donorID']}}">Update</a></td>
                 <td><button>Delete</button></td>
             </tr>
 			{% endfor %}
