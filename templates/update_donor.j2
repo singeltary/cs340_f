@@ -7,16 +7,16 @@
 
 <body>
     <ul>
-        <li><a href="donors">Donors</a></li>
+        <li><a href="http://flip2.engr.oregonstate.edu:21037/donors">Donors</a></li>
         <li><a href="donation">Donations</a></li>
         <li><a href="bloodstock">Bloodstock</a></li>
         <li><a href="recipients.html">Recipients</a></li>
         <li><a href="transfers.html">Transfers</a></li>
     </ul>
     <h1>Update Donor {{donor[0]['name']}}</h1>
-    <form action="/update_donor_c" method="POST">
+    <form action="/update_donor/{{donor[0]['donorID']}}" method="POST">
 	
-        <input type="hidden" id="donorID" name="donorID" value={{donor[0]['donorID']}}>
+        <input type="hidden" id="donorID" name="donorID" value="{{donor[0]['donorID']}}">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required value="{{donor[0]['name']}}"><br>
 
