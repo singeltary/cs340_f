@@ -10,8 +10,6 @@
         <li><a href="recipients">Recipients</a></li>
         <li><a href="transfers">Transfers</a></li>
     </ul>
-	
-	
     <h1>Donors</h1>
     <table>
         <thead>
@@ -38,12 +36,12 @@
                 <td>{{person['zip']}}</td>
                 <td>{{person['bloodType']}}</td>
                 <td><a href="update_donor/{{person['donorID']}}">Update</a></td>
-                <td><button>Delete</button></td>
+                <td><a href="delete_donor/{{person['donorID']}}">Delete</a></td>
             </tr>
 			{% endfor %}
         </tbody>
     </table>
-	<form action="/donors" method="POST">
+	<form action="/add_donor" method="POST">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br>
 
@@ -62,6 +60,6 @@
         <label for="type">Blood Type:</label>
         <input type="text" id="type" name="type" required><br>
 
-        <button type="submit" name="add_donor">Add Donor</button>
+        <button type="submit">Add Donor</button>
     </form>
 </body>
