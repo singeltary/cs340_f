@@ -53,12 +53,8 @@ def update_donor(donorID):
         state_ab = request.form.get("state")
         zip = request.form.get("zip")
         bloodType = request.form.get("type")
-        
         query2 = "UPDATE Donors SET Donors.name = %s, Donors.street = %s, Donors.city = %s, Donors.state_ab = %s, Donors.zip = %s, Donors.bloodType = %s WHERE Donors.donorID = %s"
-        cur_post = db.execute_query(db_connection=db_connection, query=query2, query_params=(name, street, city, state_ab, zip, bloodType))
-        #cur = mysql.connection.cursor()
-        #cur.execute(query2, (name, street, city, state_ab, zip, bloodType))
-        #mysql.connection.commit()
+        cur_post = db.execute_query(db_connection=db_connection, query=query2, query_params=(name, street, city, state_ab, zip, bloodType, donorID))
         return render_template('success.j2')
 
 #Delete donor
@@ -71,5 +67,5 @@ def delete_donor(donorID):
 # Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 21037))
-    app.run(port=port, debug=True) 
+    #port = int(os.environ.get('PORT', 21037))
+    app.run(host='flip2.engr.oregonstate.edu', port=21037, debug=False) 
