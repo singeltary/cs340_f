@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Transfers Page</title>
+</head>
+
+<body>
+    <ul>
+        <li><a href="donors">Donors</a></li>
+        <li><a href="donation">Donations</a></li>
+        <li><a href="bloodstock">Bloodstock</a></li>
+        <li><a href="recipients.html">Recipients</a></li>
+        <li><a href="transfers.html">Transfers</a></li>
+    </ul>
+    <h1>Transfers</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Transfer ID</th>
+                <th>Date</th>
+                <th>Quantity</th>
+                <th>Recipient ID</th>
+                <th>Recipient Name</th>
+                <th>Blood Type</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>2021-01-01 12:00:00</td>
+                <td>100.000</td>
+                <td>1</td>
+                <td>John Doe</td>
+                <td>A+</td>
+                <td>
+                    <a href="update_transfer.html">Update Transfer</a>
+                </td>
+                <td>
+                    <a href="/delete_transfer">Delete Transfer</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h1>Create Transfer</h1>
+    <form action="/create_transfer" method="POST">
+        <label for="date">Date:</label>
+        <input type="datetime-local" id="date" name="date" required><br>
+
+        <label for="quantity">Quantity:</label>
+        <input type="text" id="quantity" name="quantity" required><br>
+
+        <label for="recipientID">Recipient ID:</label>
+        <input type="number" id="recipientID" name="recipientID" required><br>
+
+        <label for="typeID">Type ID:</label>
+        <input type="number" id="typeID" name="typeID" required><br>
+
+        <button type="submit">Create Transfer</button>
+    </form>
+</body>
+
+</html>

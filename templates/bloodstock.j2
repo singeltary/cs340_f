@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bloodstock Page</title>
+</head>
+
+<body>
+    <ul>
+        <li><a href="donors">Donors</a></li>
+        <li><a href="donation">Donations</a></li>
+        <li><a href="bloodstock">Bloodstock</a></li>
+        <li><a href="recipients.html">Recipients</a></li>
+        <li><a href="transfers.html">Transfers</a></li>
+    </ul>
+    <h1>Bloodstock</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>A+</td>
+                <td>100.000</td>
+                <td>
+                    <a href="update_bloodstock.html">Update Bloodstock</a>
+                </td>
+                <td>
+                    <a href="/delete_bloodstock">Delete Bloodstock</a>
+                </td>
+        </tbody>
+    </table>
+
+    <h1>Create Bloodstock</h1>
+    <form action="/create_bloodstock" method="POST">
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type" required><br>
+
+        <label for="quantity">Quantity:</label>
+        <input type="text" id="quantity" name="quantity" required><br>
+
+        <button type="submit">Create Bloodstock</button>
+    </form>
+</body>
+
+</html>
