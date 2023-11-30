@@ -13,7 +13,6 @@
         <li><a href="recipients.html">Recipients</a></li>
         <li><a href="transfers.html">Transfers</a></li>
     </ul>
-<<<<<<< HEAD
     <h1>Update Bloodstock</h1>
     <form action="/update_bloodstock" method="POST">
         <input type="hidden" id="type" name="type" value="A+">
@@ -24,18 +23,3 @@
 </body>
 
 </html>
-=======
-    <h1>Update Bloodstock Record</h1>
-    <form action="/update_bloodstock/{{bloodstock[0]['type']}}" method="post">
-        <label for="type">Blood Type:</label>
-        <input type="text" name="type" value="{{bloodstock[0]['type']}}" readonly>
-
-        <label for="quantity">Quantity:</label>
-        <input type="number" name="quantity" value="{{bloodstock[0]['quantity']}}">
-        
-        <button type="submit">Update Donor</button>
-    </form>
-</body>
-
-</html>
->>>>>>> f50d110 (Adds jinja.)
