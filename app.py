@@ -129,6 +129,61 @@ def delete_bloodstock(type):
     return redirect("/bloodstock")
 
 
+@app.route("/donations", methods=["GET"])
+def donations():
+    query1 = "SELECT * FROM Donations;"
+    cur = mysql.connection.cursor()
+    cur.execute(query1)
+    results = cur.fetchall()
+    return render_template("donations.j2", donations=results)
+
+
+@app.route("/add_donation", methods=["POST"])
+def add_donation():
+    donorID = request.form.get("donorID")
+    type = request.form.get("type")
+    quantity = request.form.get("quantity")
+    date = request.form.get("date")
+
+    query_add = (
+        "INSERT INTO Donations (donorID, type, quantity, date) VALUES (%s, %s, %s, %s);"
+    )
+    cur = mysql.connection.cursor()
+    cur.execute(query_add, (donorID, type, quantity, date))
+    mysql.connection.commit()
+    return redirect("/donations")
+
+
+@app.route("/update_donation/<int:donationID>", methods=["GET", "POST"])
+def update_donation(donationID):
+    if request.method == "GET":
+        query1 = "SELECT * FROM Donations WHERE donationID = %s" % donationID
+        cur = mysql.connection.cursor()
+        cur.execute(query1)
+        results = cur.fetchall()
+        return render_template("update_donation.j2", donation=results)
+    if request.method == "POST":
+        donorID = request.form.get("donorID")
+        type = request.form.get("type")
+        quantity = request.form.get("quantity")
+        date = request.form.get("date")
+        query2 = "UPDATE Donations SET Donations.donorID = %s, Donations.type = %s, Donations.quantity = %s, Donations.date = %s WHERE Donations.donationID = %s"
+
+        cur = mysql.connection.cursor()
+        cur.execute(query2, (donorID, type, quantity, date, donationID))
+        mysql.connection.commit()
+        return redirect("/donations")
+
+
+@app.route("/delete_donation/<int:donationID>", methods=["GET", "POST"])
+def delete_donation(donationID):
+    query_del = "DELETE FROM Donations WHERE donationID = %s;"
+    cur = mysql.connection.cursor()
+    cur.execute(query_del, (donationID,))
+    mysql.connection.commit()
+    return redirect("/donations")
+
+
 # Listener
 if __name__ == "__main__":
     app.run(port=21039, debug=True)

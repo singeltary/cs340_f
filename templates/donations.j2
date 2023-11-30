@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donations Page</title>
+</head>
+
+<body>
+    <ul>
+        <li><a href="donors">Donors</a></li>
+        <li><a href="donation">Donations</a></li>
+        <li><a href="bloodstock">Bloodstock</a></li>
+        <li><a href="recipients.html">Recipients</a></li>
+        <li><a href="transfers.html">Transfers</a></li>
+    </ul>
+    <h1>Donations</h1>
+    <table>
+        <tr>
+            <th>Donation ID</th>
+            <th>Quantity</th>
+            <th>Donation Date</th>
+            <th>Donor ID</th>
+            <th>Donation Type</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        {% for donation in donations %}
+        <tr>
+            <td>{{ donation.donationID }}</td>
+            <td>{{ donation.quantity }}</td>
+            <td>{{ donation.date }}</td>
+            <td>{{ donation.donorID }}</td>
+            <td>{{ donation.type }}</td>
+            <td><a href="update_donation/{{ donation.donationID }}">Update</a></td>
+            <td><a href="delete_donation/{{ donation.donationID }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Add Donation</h2>
+    <form action="add_donation" method="POST">
+        <label for="donationID">Donation ID:</label><br>
+        <input type="text" id="donationID" name="donationID"><br>
+        <label for="quantity">Quantity:</label><br>
+        <input type="text" id="quantity" name="quantity"><br>
+        <label for="date">Date:</label><br>
+        <input type="text" id="date" name="date"><br>
+        <label for="donorID">Donor ID:</label><br>
+        <input type="text" id="donorID" name="donorID"><br>
+        <label for="type">Type:</label><br>
+        <input type="text" id="type" name="type"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    
+</body>
+</html>
+    
