@@ -109,7 +109,7 @@ def update_bloodstock(blood_type):
             query1,
         )
         results = cur.fetchall()
-        return render_template("update_bloodstock.j2", bloodstock=results)
+        return render_template("update_bloodstock.j2", blood=results)
     if request.method == "POST":
         quantity = request.form.get("quantity")
         query2 = "UPDATE Bloodstock SET Bloodstock.quantity = %s WHERE Bloodstock.bloodType = %s"
@@ -129,13 +129,13 @@ def delete_bloodstock(blood_type):
     return redirect("/bloodstock")
 
 
-@app.route("/donation", methods=["GET"])
+@app.route("/donations", methods=["GET"])
 def donations():
     query1 = "SELECT * FROM Donations;"
     cur = mysql.connection.cursor()
     cur.execute(query1)
     results = cur.fetchall()
-    return render_template("donation.j2", donations=results)
+    return render_template("donations.j2", donations=results)
 
 
 @app.route("/add_donation", methods=["POST"])
@@ -164,10 +164,10 @@ def update_donation(donationID):
         return render_template("update_donation.j2", donation=results)
     if request.method == "POST":
         donorID = request.form.get("donorID")
-        type = request.form.get("type")
+        type = request.form.get("bloodType")
         quantity = request.form.get("quantity")
-        date = request.form.get("date")
-        query2 = "UPDATE Donations SET Donations.donorID = %s, Donations.type = %s, Donations.quantity = %s, Donations.date = %s WHERE Donations.donationID = %s"
+        date = request.form.get("donationDate")
+        query2 = "UPDATE Donations SET Donations.donorID = %s, Donations.bloodType = %s, Donations.quantity = %s, Donations.date = %s WHERE Donations.donationID = %s"
 
         cur = mysql.connection.cursor()
         cur.execute(query2, (donorID, type, quantity, date, donationID))
@@ -184,6 +184,14 @@ def delete_donation(donationID):
     return redirect("/donations")
 
 
+@app.route("/recipients", methods=["GET", "POST"])
+def recipients():
+    query_rec = "SELECT * FROM Recipients;"
+    cur = mysql.connection.cursor()
+    cur.execute(query_rec)
+    results = cur.fetchall()
+    return render_template('recipients.j2', recipients=results)
+    
 # Listener
 if __name__ == "__main__":
     app.run(port=21039, debug=True)
