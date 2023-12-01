@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html>
-
 <head>
     <title>Recipients Page</title>
 </head>
 
 <body>
     <ul>
-        <li><a href="donors">Donors</a></li>
-        <li><a href="donation">Donations</a></li>
-        <li><a href="bloodstock">Bloodstock</a></li>
-        <li><a href="recipients.html">Recipients</a></li>
-        <li><a href="transfers.html">Transfers</a></li>
+        <li><a href="/donors">Donors</a></li>
+        <li><a href="/donations">Donations</a></li>
+        <li><a href="/bloodstock">Bloodstock</a></li>
+        <li><a href="/recipients">Recipients</a></li>
+        <li><a href="/transfers">Transfers</a></li>
     </ul>
     <h1>Recipients</h1>
-    <table>
+	<table>
         <thead>
             <tr>
                 <th>Recipient ID</th>
@@ -22,29 +19,27 @@
                 <th>Street</th>
                 <th>City</th>
                 <th>State</th>
-                <th>Type</th>
-                <th>Transfer ID</th>
+				<th>Zip</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
         </thead>
         <tbody>
+			{% for recipient in recipients %}
             <tr>
-                <td>1</td>
-                <td>John Doe</td>
-                <td>123 Main St</td>
-                <td>Anytown</td>
-                <td>NY</td>
-                <td>A+</td>
-                <td>1</td>
-                <td><a href="update_recipient.html?recipient=123">Update</a></td>
-                <td><button>Delete</button></td>
+                <td>{{recipient['recipientID']}}</td>
+				<td>{{recipient['name']}}</td>
+				<td>{{recipient['street']}}</td>
+				<td>{{recipient['city']}}</td>
+				<td>{{recipient['state_ab']}}</td>
+				<td>{{recipient['zip']}}</td>
+				<td><a href="/update_recipient/{{recipient['recipientID']}}">Update</a></td>
+				<td><a href="/delete_recipient/{{recipient['recipientID']}}">Delete</a></td>
             </tr>
+			{% endfor %}
         </tbody>
     </table>
-
-    <h1>Create Recipient</h1>
-    <form action="/create_recipient" method="POST">
+		<form action="/add_recipient" method="POST">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br>
 
@@ -57,14 +52,9 @@
         <label for="state">State:</label>
         <input type="text" id="state" name="state" required><br>
 
-        <label for="type">Type:</label>
-        <input type="text" id="type" name="type" required><br>
+        <label for="zip">Zip:</label>
+        <input type="text" id="zip" name="zip" required><br>
 
-        <label for="transferID">Transfer ID:</label>
-        <input type="number" id="transferID" name="transferID"><br>
-
-        <button type="submit">Create Recipient</button>
+        <button type="submit">Add Recipient</button>
     </form>
 </body>
-
-</html>
