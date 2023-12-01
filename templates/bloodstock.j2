@@ -21,18 +21,14 @@
             </tr>
         </thead>
         <tbody>
-			{% for type in blood %}
+            {% for stock in bloodstock %}
             <tr>
-                <td>{{type['bloodType']}}</td>
-                <td>{{type['quantity']}}</td>
-                <td>
-                    <a href="update_bloodstock/{{type['bloodType']}}">Update Bloodstock</a>
-                </td>
-                <td>
-                    <a href="/delete_bloodstock/{{[type['bloodType']}}">Delete Bloodstock</a>
-                </td>
-			</tr>
-			{% endfor %}
+                <td>{{ stock.bloodType }}</td>
+                <td>{{ stock.quantity }}</td>
+                <td><a href="/update_bloodstock/{{ stock.bloodType }}">Update</a></td>
+                <td><a href="/delete_bloodstock/{{ stock.bloodType }}">Delete</a></td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
 

@@ -93,49 +93,49 @@ def add_bloodstock():
     bloodType = request.form.get("type")
     quantity = request.form.get("quantity")
 
-    query_add = "INSERT INTO BloodStock (bloodType, quantity) VALUES (%s, %s);"
+    query_add = "INSERT INTO Bloodstock (bloodType, quantity) VALUES (%s, %s);"
     cur = mysql.connection.cursor()
     cur.execute(query_add, (bloodType, quantity))
     mysql.connection.commit()
     return redirect("/bloodstock")
 
 
-@app.route("/update_bloodstock/<type:str>", methods=["GET", "POST"])
-def update_bloodstock(type):
+@app.route("/update_bloodstock/<string:blood_type>", methods=["GET", "POST"])
+def update_bloodstock(blood_type):
     if request.method == "GET":
-        query1 = "SELECT * FROM BloodStock WHERE type = %s" % type
+        query1 = "SELECT * FROM Bloodstock WHERE bloodType = '%s'" % blood_type
         cur = mysql.connection.cursor()
-        cur.execute(query1)
+        cur.execute(
+            query1,
+        )
         results = cur.fetchall()
         return render_template("update_bloodstock.j2", bloodstock=results)
     if request.method == "POST":
         quantity = request.form.get("quantity")
-        query2 = (
-            "UPDATE BloodStock SET BloodStock.quantity = %s WHERE BloodStock.type = %s"
-        )
+        query2 = "UPDATE Bloodstock SET Bloodstock.quantity = %s WHERE Bloodstock.bloodType = %s"
 
         cur = mysql.connection.cursor()
-        cur.execute(query2, (quantity, type))
+        cur.execute(query2, (quantity, blood_type))
         mysql.connection.commit()
         return redirect("/bloodstock")
 
 
-@app.route("/delete_bloodstock/<type:str>", methods=["GET", "POST"])
-def delete_bloodstock(type):
-    query_del = "DELETE FROM BloodStock WHERE type = %s;"
+@app.route("/delete_bloodstock/<string:blood_type>", methods=["GET", "POST"])
+def delete_bloodstock(blood_type):
+    query_del = "DELETE FROM Bloodstock WHERE bloodType = %s;"
     cur = mysql.connection.cursor()
-    cur.execute(query_del, (type,))
+    cur.execute(query_del, (blood_type,))
     mysql.connection.commit()
     return redirect("/bloodstock")
 
 
-@app.route("/donations", methods=["GET"])
+@app.route("/donation", methods=["GET"])
 def donations():
     query1 = "SELECT * FROM Donations;"
     cur = mysql.connection.cursor()
     cur.execute(query1)
     results = cur.fetchall()
-    return render_template("donations.j2", donations=results)
+    return render_template("donation.j2", donations=results)
 
 
 @app.route("/add_donation", methods=["POST"])
