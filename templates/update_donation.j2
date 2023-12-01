@@ -11,17 +11,19 @@
         <li><a href="/transfers">Transfers</a></li>
     </ul>
     <h1>Update Donation</h1>
-    <form method="POST" action="/update_donation/{{donation.donationId}}">
+    <form method="POST" action="/update_donation/{{donation[0]['donationID']}}">
         <label for="donorId">Donor ID:</label>
-        <input type="text" id="donorId" name="donorId" required value="{{donation.donorID}}"><br>
+        <input type="text" id="donorId" name="donorId" required value="{{donation[0]['donorID']}}"><br>
 
         <label for="donationDate">Donation Date:</label>
-        <input type="text" id="donationDate" name="donationDate" required value="{{donation.date}}"><br>
+        <input type="text" id="donationDate" name="donationDate" required value="{{donation[0]['date']}}"><br>
 
         <label for="bloodType">Blood Type:</label>
-        <input type="text" id="bloodType" name="bloodType" required value="{{donation.type}}"><br>
+        <input type="text" id="bloodType" name="bloodType" required value="{{donation[0]['bloodType']}}"><br>
 
         <label for="quantity">Quantity:</label>
-        <input type="text" id="quantity" name="quantity" required value="{{donation.quantity}}"><br>
+        <input type="text" id="quantity" name="quantity" required value="{{donation[0]['quantity']}}"><br>
+		
+		<button type="submit">Update Donation</button>
     </form>
 </body>
