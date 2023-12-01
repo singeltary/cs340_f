@@ -81,11 +81,11 @@ def delete_donor(donorID):
 
 @app.route("/bloodstock", methods=["GET"])
 def bloodstock():
-    query1 = "SELECT * FROM BloodStock;"
+    query1 = "SELECT * FROM Bloodstock;"
     cur = mysql.connection.cursor()
     cur.execute(query1)
     results = cur.fetchall()
-    return render_template("bloodstock.j2", bloodstock=results)
+    return render_template("bloodstock.j2", blood=results)
 
 
 @app.route("/add_bloodstock", methods=["POST"])
