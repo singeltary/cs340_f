@@ -1,41 +1,33 @@
-<!DOCTYPE html>
-<html>
-
 <head>
     <title>Update Recipient</title>
 </head>
 
 <body>
     <ul>
-        <li><a href="donors">Donors</a></li>
-        <li><a href="donation">Donations</a></li>
-        <li><a href="bloodstock">Bloodstock</a></li>
-        <li><a href="recipients.html">Recipients</a></li>
-        <li><a href="transfers.html">Transfers</a></li>
+        <li><a href="/donors">Donors</a></li>
+        <li><a href="/donations">Donations</a></li>
+        <li><a href="/bloodstock">Bloodstock</a></li>
+        <li><a href="/recipients">Recipients</a></li>
+        <li><a href="/transfers">Transfers</a></li>
     </ul>
     <h1>Update Recipient</h1>
-    <form action="/update_recipient" method="POST">
+    <form action="/update_recipient/{{recipient[0]['recipientID']}}" method="POST">
         <input type="hidden" id="recipientID" name="recipientID" value="1">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required value="John Doe"><br>
+        <input type="text" id="name" name="name" required value="{{recipient[0]['name']}}"><br>
 
         <label for="street">Street:</label>
-        <input type="text" id="street" name="street" required value="123 Main St"><br>
+        <input type="text" id="street" name="street" required value="{{recipient[0]['street']}}"><br>
 
         <label for="city">City:</label>
-        <input type="text" id="city" name="city" required value="Anytown"><br>
+        <input type="text" id="city" name="city" required value="{{recipient[0]['city']}}"><br>
 
         <label for="state">State:</label>
-        <input type="text" id="state" name="state" required value="NY"><br>
-
-        <label for="type">Type:</label>
-        <input type="text" id="type" name="type" required value="A+"><br>
-
-        <label for="transferID">Transfer ID:</label>
-        <input type="number" id="transferID" name="transferID" value="1"><br>
+        <input type="text" id="state" name="state" required value="{{recipient[0]['state_ab']}}"><br>
+		
+		<label for="zip">Zip:</label>
+		<input type="text" id="zip" name="zip" required value="{{recipient[0]['zip']}}"><br>
 
         <button type="submit">Update Recipient</button>
     </form>
 </body>
-
-</html>
