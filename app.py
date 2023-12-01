@@ -191,7 +191,7 @@ def recipients():
     cur.execute(query_rec)
     results = cur.fetchall()
     return render_template('recipients.j2', recipients=results)
-    
+
 @app.route("/add_recipient", methods=["POST"])
 def add_recipient():
     if request.method == "POST":
@@ -227,6 +227,65 @@ def update_recipient(recipientID):
         cur.execute(query2, (name, street, city, state_ab, zip, recipientID))
         mysql.connection.commit()
         return redirect("/recipients")
+        
+@app.route("/delete_recipient/<int:recipientID>", methods=["GET", "POST"])
+def delete_recipient(recipientID):
+    query_del = "DELETE FROM Recipients WHERE recipientID = '%s';"
+    cur = mysql.connection.cursor()
+    cur.execute(query_del, (recipientID,))
+    mysql.connection.commit()
+    return redirect("/recipients")
+   
+@app.route('/transfers', methods=["GET", "POST"])
+def transfers():
+    if request.method == "GET":
+        query_t = "SELECT * FROM Transfers;"
+        cur = mysql.connection.cursor()
+        cur.execute(query_t)
+        results = cur.fetchall()
+        return render_template('transfers.j2', transfers=results)
+       
+@app.route('/add_transfer', methods=["GET", "POST"])
+def add_transfer():
+    if request.method == "POST":
+        date = request.form.get("date")
+        quantity = request.form.get("quantity")
+        recipientID = request.form.get("recipientID")
+        bloodType = request.form.get("type")
+        
+        query_add = "INSERT INTO Transfers (date, quantity, recipientID, bloodType) VALUES (%s, %s, %s, %s);"
+        cur = mysql.connection.cursor()
+        cur.execute(query_add, (date, quantity, recipientID, bloodType))
+        mysql.connection.commit()
+        return redirect('/transfers')
+        
+@app.route('/update_transfer/<int:transferID>', methods=["GET", "POST"])
+def update_transfer(transferID):
+    if request.method == "GET":
+        query1 = "SELECT * FROM Transfers WHERE transferID = %s" % transferID
+        cur = mysql.connection.cursor()
+        cur.execute(query1)
+        results = cur.fetchall()
+        return render_template("update_transfer.j2", transfer=results)
+    if request.method == "POST":
+        date = request.form.get("date")
+        recipientID = request.form.get("recipientID")
+        quantity = request.form.get("quantity")
+        bloodType = request.form.get("type")
+        query2 = "UPDATE Transfers SET Transfers.date = %s, Transfers.quantity = %s, Transfers.recipientID = %s, Transfers.bloodType = %s WHERE Transfers.transferID = %s"
+
+        cur = mysql.connection.cursor()
+        cur.execute(query2, (date, quantity, recipientID, bloodType, transferID))
+        mysql.connection.commit()
+        return redirect("/transfers")
+        
+@app.route("/delete_transfer/<int:transferID>", methods=["GET", "POST"])
+def delete_transfer(transferID):
+    query_del = "DELETE FROM Transfers WHERE transferID = '%s';"
+    cur = mysql.connection.cursor()
+    cur.execute(query_del, (transferID,))
+    mysql.connection.commit()
+    return redirect("/transfers")
     
 # Listener
 if __name__ == "__main__":
