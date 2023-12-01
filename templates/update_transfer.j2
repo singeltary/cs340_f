@@ -1,35 +1,30 @@
-<!DOCTYPE html>
-<html>
-
 <head>
     <title>Update Transfer</title>
 </head>
 
 <body>
     <ul>
-        <li><a href="donors">Donors</a></li>
-        <li><a href="donation">Donations</a></li>
-        <li><a href="bloodstock">Bloodstock</a></li>
-        <li><a href="recipients.html">Recipients</a></li>
-        <li><a href="transfers.html">Transfers</a></li>
+        <li><a href="/donors">Donors</a></li>
+        <li><a href="/donations">Donations</a></li>
+        <li><a href="/bloodstock">Bloodstock</a></li>
+        <li><a href="/recipients">Recipients</a></li>
+        <li><a href="/transfers">Transfers</a></li>
     </ul>
     <h1>Update Transfer</h1>
-    <form action="/update_transfer" method="POST">
-        <input type="hidden" id="transferID" name="transferID" value="1">
+    <form action="/update_transfer/{{transfer[0]['transferID']}}" method="POST">
+        <input type="hidden" id="transferID" name="transferID" value="{{transfer[0]['transferID']}}">
         <label for="date">Date:</label>
-        <input type="datetime-local" id="date" name="date" required value="2023-01-01T12:00"><br>
+        <input type="text" id="date" name="date" required value="{{transfer[0]['date']}}"><br>
 
         <label for="quantity">Quantity:</label>
-        <input type="text" id="quantity" name="quantity" required value="5.000"><br>
+        <input type="text" id="quantity" name="quantity" required value="{{transfer[0]['quantity']}}"><br>
 
         <label for="recipientID">Recipient ID:</label>
-        <input type="number" id="recipientID" name="recipientID" required value="1"><br>
+        <input type="text" id="recipientID" name="recipientID" required value="{{transfer[0]['recipientID']}}"><br>
 
-        <label for="typeID">Type ID:</label>
-        <input type="number" id="typeID" name="typeID" required value="1"><br>
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type" required value="{{transfer[0]['bloodType']}}"><br>
 
         <button type="submit">Update Transfer</button>
     </form>
 </body>
-
-</html>
