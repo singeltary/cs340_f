@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html>
-
 <head>
     <title>Update Donation</title>
 </head>
 
 <body>
     <ul>
-        <li><a href="donors">Donors</a></li>
-        <li><a href="donation">Donations</a></li>
-        <li><a href="bloodstock">Bloodstock</a></li>
-        <li><a href="recipients.html">Recipients</a></li>
-        <li><a href="transfers.html">Transfers</a></li>
+        <li><a href="/donors">Donors</a></li>
+        <li><a href="/donation">Donations</a></li>
+        <li><a href="/bloodstock">Bloodstock</a></li>
+        <li><a href="/recipients">Recipients</a></li>
+        <li><a href="/transfers">Transfers</a></li>
     </ul>
     <h1>Update Donation</h1>
     <form method="POST" action="/update_donation/{{donation.donationId}}">
@@ -28,5 +25,3 @@
         <input type="text" id="quantity" name="quantity" required value="{{donation.quantity}}"><br>
     </form>
 </body>
-
-</html>
