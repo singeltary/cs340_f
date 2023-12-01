@@ -1,27 +1,23 @@
-<html>
-
 <head>
     <title>Update Bloodstock</title>
 </head>
 
 <body>
     <ul>
-        <li><a href="donors">Donors</a></li>
-        <li><a href="donation">Donations</a></li>
-        <li><a href="bloodstock">Bloodstock</a></li>
-        <li><a href="recipients.html">Recipients</a></li>
-        <li><a href="transfers.html">Transfers</a></li>
+        <li><a href="/donors">Donors</a></li>
+        <li><a href="/donations">Donations</a></li>
+        <li><a href="/bloodstock">Bloodstock</a></li>
+        <li><a href="/recipients">Recipients</a></li>
+        <li><a href="/transfers">Transfers</a></li>
     </ul>
     <h1>Update Bloodstock Record</h1>
-    <form action="/update_bloodstock/{{bloodstock[0]['type']}}" method="post">
+    <form action="/update_bloodstock/{{blood[0]['bloodType']}}" method="post">
         <label for="type">Blood Type:</label>
-        <input type="text" name="type" value="{{bloodstock[0]['type']}}" readonly>
+        <input type="text" name="type" value="{{blood[0]['bloodType']}}" readonly>
 
         <label for="quantity">Quantity:</label>
-        <input type="number" name="quantity" value="{{bloodstock[0]['quantity']}}">
+        <input type="number" name="quantity" value="{{blood[0]['quantity']}}">
         
-        <button type="submit">Update Donor</button>
+        <button type="submit">Update Stock</button>
     </form>
 </body>
-
-</html>
