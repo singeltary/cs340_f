@@ -192,6 +192,42 @@ def recipients():
     results = cur.fetchall()
     return render_template('recipients.j2', recipients=results)
     
+@app.route("/add_recipient", methods=["POST"])
+def add_recipient():
+    if request.method == "POST":
+        name = request.form.get("name")
+        street = request.form.get("street")
+        city = request.form.get("city")
+        state_ab = request.form.get("state")
+        zip = request.form.get("zip")
+
+        query_add = "INSERT INTO Recipients (name, street, city, state_ab, zip) VALUES (%s, %s, %s, %s, %s);"
+        cur = mysql.connection.cursor()
+        cur.execute(query_add, (name, street, city, state_ab, zip))
+        mysql.connection.commit()
+        return redirect("/recipients")
+        
+@app.route("/update_recipient/<int:recipientID>", methods=["GET", "POST"])
+def update_recipient(recipientID):
+    if request.method == "GET":
+        query1 = "SELECT * FROM Recipients WHERE recipientID = %s" % recipientID
+        cur = mysql.connection.cursor()
+        cur.execute(query1)
+        results = cur.fetchall()
+        return render_template("update_recipient.j2", recipient=results)
+    if request.method == "POST":
+        name = request.form.get("name")
+        street = request.form.get("street")
+        city = request.form.get("city")
+        state_ab = request.form.get("state")
+        zip = request.form.get("zip")
+        query2 = "UPDATE Recipients SET Recipients.name = %s, Recipients.street = %s, Recipients.city = %s, Recipients.state_ab = %s, Recipients.zip = %s WHERE Recipients.recipientID = %s"
+
+        cur = mysql.connection.cursor()
+        cur.execute(query2, (name, street, city, state_ab, zip, recipientID))
+        mysql.connection.commit()
+        return redirect("/recipients")
+    
 # Listener
 if __name__ == "__main__":
     app.run(port=21039, debug=True)
