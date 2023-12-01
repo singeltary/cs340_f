@@ -5,10 +5,10 @@
 <body>
     <ul>
         <li><a href="/donors">Donors</a></li>
-        <li><a href="/donation">Donations</a></li>
+        <li><a href="/donations">Donations</a></li>
         <li><a href="/bloodstock">Bloodstock</a></li>
-        <li><a href="/recipients.html">Recipients</a></li>
-        <li><a href="/transfers.html">Transfers</a></li>
+        <li><a href="/recipients">Recipients</a></li>
+        <li><a href="/transfers">Transfers</a></li>
     </ul>
     <h1>Bloodstock</h1>
     <table>
@@ -21,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for stock in bloodstock %}
+            {% for stock in blood %}
             <tr>
                 <td>{{ stock.bloodType }}</td>
                 <td>{{ stock.quantity }}</td>
