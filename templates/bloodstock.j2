@@ -4,11 +4,11 @@
 
 <body>
     <ul>
-        <li><a href="donors">Donors</a></li>
-        <li><a href="donation">Donations</a></li>
-        <li><a href="bloodstock">Bloodstock</a></li>
-        <li><a href="recipients.html">Recipients</a></li>
-        <li><a href="transfers.html">Transfers</a></li>
+        <li><a href="/donors">Donors</a></li>
+        <li><a href="/donation">Donations</a></li>
+        <li><a href="/bloodstock">Bloodstock</a></li>
+        <li><a href="/recipients.html">Recipients</a></li>
+        <li><a href="/transfers.html">Transfers</a></li>
     </ul>
     <h1>Bloodstock</h1>
     <table>
@@ -21,15 +21,18 @@
             </tr>
         </thead>
         <tbody>
+			{% for type in blood %}
             <tr>
-                <td>A+</td>
-                <td>100.000</td>
+                <td>{{type['bloodType']}}</td>
+                <td>{{type['quantity']}}</td>
                 <td>
-                    <a href="update_bloodstock.html">Update Bloodstock</a>
+                    <a href="update_bloodstock/{{type['bloodType']}}">Update Bloodstock</a>
                 </td>
                 <td>
-                    <a href="/delete_bloodstock">Delete Bloodstock</a>
+                    <a href="/delete_bloodstock/{{[type['bloodType']}}">Delete Bloodstock</a>
                 </td>
+			</tr>
+			{% endfor %}
         </tbody>
     </table>
 
