@@ -12,7 +12,7 @@
     </ul>
     <h1>Update Recipient</h1>
     <form action="/update_recipient/{{recipient[0]['recipientID']}}" method="POST">
-        <input type="hidden" id="recipientID" name="recipientID" value="1">
+        <input type="hidden" id="recipientID" name="recipientID" value="{{recipient[0]['recipientID']}}">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required value="{{recipient[0]['name']}}"><br>
 
