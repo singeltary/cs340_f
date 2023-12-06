@@ -33,21 +33,56 @@
         </tr>
         {% endfor %}
     </table>
+	<table>
+		<tr>
+			<td>
+				<h2>Add Donation</h2>
+				<form action="add_donation" method="POST">
+					<label for="donationID">Donation ID:</label><br>
+					<input type="text" id="donationID" name="donationID"><br>
+					<label for="quantity">Quantity:</label><br>
+					<input type="text" id="quantity" name="quantity"><br>
+					<label for="date">Date:</label><br>
+					<input type="text" id="date" name="date"><br>
+					<label for="donorID">Donor ID:</label><br>
+					<input type="text" id="donorID" name="donorID"><br>
+					<label for="type">Type:</label><br>
+					<input type="text" id="type" name="type"><br><br>
+					<input type="submit" value="Add Donation">
+				</form>
+			</td>
+			<td>
+				<h2>Update Donation</h2>
+				<form>
+					<script type="text/javascript">
+						function getID(selID){
+							donation_sel = selID.value;
+						window.location.replace('/update_donor/'+ donation_sel);
+						}
+					</script>
+					<label for="donationID">Donation ID:</label>
+					<select id="donationID_select" onChange="getID(this)">
+						{% for donation in donations %}
+						<option value="{{donation.donationdID}}">{{donation.donationID}}</option>
+						{% endfor %}
+					</select>
+					<br>
+					<label for="donorID">Donor ID:</label>
+					<input type="text" id="donorID" name="donorID"><br>
 
-    <h2>Add Donation</h2>
-    <form action="add_donation" method="POST">
-        <label for="donationID">Donation ID:</label><br>
-        <input type="text" id="donationID" name="donationID"><br>
-        <label for="quantity">Quantity:</label><br>
-        <input type="text" id="quantity" name="quantity"><br>
-        <label for="date">Date:</label><br>
-        <input type="text" id="date" name="date"><br>
-        <label for="donorID">Donor ID:</label><br>
-        <input type="text" id="donorID" name="donorID"><br>
-        <label for="type">Type:</label><br>
-        <input type="text" id="type" name="type"><br><br>
-        <input type="submit" value="Submit">
-    </form>
-    
+					<label for="donationDate">Donation Date:</label>
+					<input type="text" id="donationDate" name="donationDate" value=""><br>
+
+					<label for="bloodType">Blood Type:</label>
+					<input type="text" id="bloodType" name="bloodType" required value=""><br>
+
+					<label for="quantity">Quantity:</label>
+					<input type="text" id="quantity" name="quantity" required value=""><br><br>
+						
+					<button type="submit">Update Donation</button>
+				</form>
+			</td>
+		</tr>
+	</table>
 </body>
     
