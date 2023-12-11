@@ -20,7 +20,11 @@
         <input type="text" id="quantity" name="quantity" required value="{{transfer[0]['quantity']}}"><br>
 
         <label for="recipientID">Recipient ID:</label>
-        <input type="text" id="recipientID" name="recipientID" required value="{{transfer[0]['recipientID']}}"><br>
+        <select id="recipientID" name="recipientID" required>
+            {% for recipient in recipients %}
+                <option value="{{ recipient['recipientID'] }}" {% if recipient['recipientID'] == transfer[0]['recipientID'] %} selected {% endif %}>{{ recipient['recipientID'] }}</option>
+            {% endfor %}
+        </select><br>
 
         <label for="type">Type:</label>
         <input type="text" id="type" name="type" required value="{{transfer[0]['bloodType']}}"><br>

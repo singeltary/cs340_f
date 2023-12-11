@@ -13,16 +13,20 @@
     <h1>Update Donation</h1>
     <form method="POST" action="/update_donation/{{donation[0]['donationID']}}">
         <label for="donorID">Donor ID:</label>
-        <input type="text" id="donorID" name="donorID" required value="{{donation[0]['donorID']}}"><br>
+        <select id="donorID" name="donorID" required>
+            {% for donor in donors %}
+                <option value="{{ donor['donorID'] }}" {% if donor['donorID'] == donation[0]['donorID'] %} selected {% endif %}>{{ donor['donorID'] }}</option>
+            {% endfor %}
+        </select><br>
 
         <label for="donationDate">Donation Date:</label>
-        <input type="text" id="donationDate" name="donationDate" required value="{{donation[0]['date']}}"><br>
+        <input type="date" id="donationDate" name="donationDate" required value="{{donation[0]['date']}}"><br>
 
         <label for="bloodType">Blood Type:</label>
         <input type="text" id="bloodType" name="bloodType" required value="{{donation[0]['bloodType']}}"><br>
 
         <label for="quantity">Quantity:</label>
-        <input type="text" id="quantity" name="quantity" required value="{{donation[0]['quantity']}}"><br>
+        <input type="number" id="quantity" name="quantity" required value="{{donation[0]['quantity']}}"><br>
 		
 		<button type="submit">Update Donation</button>
     </form>
