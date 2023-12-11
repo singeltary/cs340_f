@@ -1,11 +1,6 @@
 <head>
-    <title>Donations Page</title>
+    <title>Donations</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<script>
-	//	function getID(donationID) {
-	//		window.location.href = '/get_donation/' + donationID.text;
-	//	};
-	</script>
 </head>
 
 <body>
@@ -23,7 +18,7 @@
             <th>Quantity</th>
             <th>Donation Date</th>
             <th>Donor ID</th>
-            <th>Donation Type</th>
+            <th>Blood Type</th>
             <th>Update</th>
             <th>Delete</th>
         </tr>
@@ -43,45 +38,35 @@
 		<tr>
 			<td>
 				<h2>Add Donation</h2>
-				<form action="/add_donation" method="POST">
-					<label for="quantity">Quantity:</label><br>
-					<input type="text" id="quantity" name="quantity"><br>
-					<label for="date">Date:</label><br>
-					<input type="text" id="date" name="date"><br>
+				<form id="add_donation_form" action="/add_donation" method="POST">
 					<label for="donorID">Donor ID:</label>
-					<select id="update_donation_donorID_select">
+					<select id="add_donation_donorID_select">
 						{% for d_item in d %}
 						<option value="{{d_item.donorID}}" text="{{d_item.donorID}}">{{d_item.donorID}}</option>
 						{% endfor %}
 					</select><br>
-					<label for="type">Type:</label><br>
-					<input type="text" id="bloodType" name="bloodType"><br><br>
-					<input type="submit" value="Add Donation">
-				</form>
-			</td>
-			<td>
-				<h2>Update Donation</h2>
-				<form action="/update_donation" method="POST">
-					
-					<label for="donationID">Donation ID:</label>
-					<select id="donationID_select">
-						{% for donation_list in donations %}
-						<option value="{{donation_list.donationdID}}" text="{{donation_list.donationID}}">{{donation_list.donationID}}</option>
-						{% endfor %}
-					</select>
-					<br>
-
-					<label for="donationDate">Donation Date:</label>
-					<input type="text" id="donationDate" name="donationDate" value=""><br>
-
-					<label for="bloodType">Blood Type:</label>
-					<input type="text" id="bloodType" name="bloodType" required value=""><br>
-
+					<label for="donor_name_add">Name:</label>
+					<input type="text" id="donor_name_add" name="donor_name_add" readonly><br>
+					<label for="bloodType_add">Type:</label>
+					<input type="text" id="bloodType_add" name="bloodType_add"><br>
 					<label for="quantity">Quantity:</label>
-					<input type="text" id="quantity" name="quantity" required value=""><br><br>
-						
-					<button type="submit">Update Donation</button>
+					<input type="text" id="quantity_add" name="quantity_add"><br>
+					<label for="date">Date:</label>
+					<input type="text" id="date_add" name="date_add"><br>
+					<br>
+					<input type="submit" value="Add Donation" id="add_submit">
 				</form>
+				<script>
+					$("#add_donation_donorID_select").on("change", function (){
+						$.get(
+							'/get_donor/' + $("#add_donation_donorID_select").val(), function(donor_res) {
+							$("#donor_name_add").val(donor_res[0]);
+							$("#bloodType_add").val(donor_res[1]);
+							$("#quantity_add").val('');
+							$("date_add").val('');
+						});
+					});
+				</script>
 			</td>
 		</tr>
 	</table>
