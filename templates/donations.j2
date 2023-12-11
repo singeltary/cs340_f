@@ -1,5 +1,11 @@
 <head>
     <title>Donations Page</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script>
+	//	function getID(donationID) {
+	//		window.location.href = '/get_donation/' + donationID.text;
+	//	};
+	</script>
 </head>
 
 <body>
@@ -27,7 +33,7 @@
             <td>{{ donation.quantity }}</td>
             <td>{{ donation.date }}</td>
             <td>{{ donation.donorID }}</td>
-            <td>{{ donation.type }}</td>
+            <td>{{ donation.bloodType }}</td>
             <td><a href="update_donation/{{ donation.donationID }}">Update</a></td>
             <td><a href="delete_donation/{{ donation.donationID }}">Delete</a></td>
         </tr>
@@ -37,9 +43,7 @@
 		<tr>
 			<td>
 				<h2>Add Donation</h2>
-				<form action="add_donation" method="POST">
-					<label for="donationID">Donation ID:</label><br>
-					<input type="text" id="donationID" name="donationID"><br>
+				<form action="/add_donation" method="POST">
 					<label for="quantity">Quantity:</label><br>
 					<input type="text" id="quantity" name="quantity"><br>
 					<label for="date">Date:</label><br>
@@ -47,28 +51,23 @@
 					<label for="donorID">Donor ID:</label><br>
 					<input type="text" id="donorID" name="donorID"><br>
 					<label for="type">Type:</label><br>
-					<input type="text" id="type" name="type"><br><br>
+					<input type="text" id="bloodType" name="bloodType"><br><br>
 					<input type="submit" value="Add Donation">
 				</form>
 			</td>
 			<td>
 				<h2>Update Donation</h2>
-				<form>
-					<script type="text/javascript">
-						function getID(selID){
-							donation_sel = selID.value;
-						window.location.replace('/update_donor/'+ donation_sel);
-						}
-					</script>
+				<form action="/update_donation" method="POST">
+					
 					<label for="donationID">Donation ID:</label>
-					<select id="donationID_select" onChange="getID(this)">
-						{% for donation in donations %}
-						<option value="{{donation.donationdID}}">{{donation.donationID}}</option>
+					<select id="donationID_select">
+						{% for donation_list in donations %}
+						<option value="{{donation_list.donationdID}}" text="{{donation_list.donationID}}">{{donation_list.donationID}}</option>
 						{% endfor %}
 					</select>
 					<br>
 					<label for="donorID">Donor ID:</label>
-					<input type="text" id="donorID" name="donorID"><br>
+					<input type="text" id="donorID" name="donorID" value=""><br>
 
 					<label for="donationDate">Donation Date:</label>
 					<input type="text" id="donationDate" name="donationDate" value=""><br>
