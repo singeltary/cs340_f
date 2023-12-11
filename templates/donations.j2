@@ -48,8 +48,12 @@
 					<input type="text" id="quantity" name="quantity"><br>
 					<label for="date">Date:</label><br>
 					<input type="text" id="date" name="date"><br>
-					<label for="donorID">Donor ID:</label><br>
-					<input type="text" id="donorID" name="donorID"><br>
+					<label for="donorID">Donor ID:</label>
+					<select id="update_donation_donorID_select">
+						{% for d_item in d %}
+						<option value="{{d_item.donorID}}" text="{{d_item.donorID}}">{{d_item.donorID}}</option>
+						{% endfor %}
+					</select><br>
 					<label for="type">Type:</label><br>
 					<input type="text" id="bloodType" name="bloodType"><br><br>
 					<input type="submit" value="Add Donation">
@@ -66,8 +70,6 @@
 						{% endfor %}
 					</select>
 					<br>
-					<label for="donorID">Donor ID:</label>
-					<input type="text" id="donorID" name="donorID" value=""><br>
 
 					<label for="donationDate">Donation Date:</label>
 					<input type="text" id="donationDate" name="donationDate" value=""><br>
