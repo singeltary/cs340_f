@@ -20,7 +20,7 @@
         </select><br>
 
         <label for="donationDate">Donation Date:</label>
-        <input type="date" id="donationDate" name="donationDate" required value="{{donation[0]['date']}}"><br>
+        <input type="date" id="donationDate" name="donationDate" required value="{{donation[0]['date'].strftime('%Y-%m-%d')}}"><br>
 
         <label for="bloodType">Blood Type:</label>
         <input type="text" id="bloodType" name="bloodType" required value="{{donation[0]['bloodType']}}"><br>
