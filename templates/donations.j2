@@ -40,7 +40,7 @@
 				<h2>Add Donation</h2>
 				<form id="add_donation_form" action="/add_donation" method="POST">
 					<label for="donorID">Donor ID:</label>
-					<select id="add_donation_donorID_select">
+					<select id="add_donation_donorID_select" name="donorID">
 						{% for d_item in d %}
 						<option value="{{d_item.donorID}}" text="{{d_item.donorID}}">{{d_item.donorID}}</option>
 						{% endfor %}
